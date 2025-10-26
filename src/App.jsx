@@ -1,12 +1,13 @@
 import "./App.css";
-import { getElement } from "./utilities/utilities";
+import { addElement } from "./utilities/utilities";
 
 function App() {
-const handleAddTask = (e) =>{
-  e.preventDefault()
-  const data = getElement('task')
-  console.log(data)
-}
+  const handleAddTask = (e) => {
+    e.preventDefault();
+    const newTask = e.target.task.value;
+    console.log(newTask);
+    addElement(newTask)
+  };
   return (
     <>
       <header className="flex justify-center py-5 bg-base-300">
@@ -83,14 +84,23 @@ const handleAddTask = (e) =>{
           </table>
         </div>
         {/* Add Task */}
-        <form className="bg-gray-200 mt-10 p-5 rounded-2xl w-1/2 mx-auto">
+        <div className="bg-gray-200 mt-10 p-5 rounded-2xl w-1/2 mx-auto">
           <h1 className="text-center text-2xl font-semibold ">Add a Task</h1>
           <fieldset className="fieldset">
-            <label className="label">Email</label>
-            <input type="text" className="input w-full" placeholder="Email" />
-            <button onClick={handleAddTask} className="btn btn-neutral mt-4">Add Task</button>
+            <form onSubmit={handleAddTask}>
+              <label className="label">Task Details:</label>
+              <input
+                type="text"
+                name="task"
+                className="input w-full"
+                placeholder="Add New Task"
+              />
+              <button  className="btn btn-neutral mt-4">
+                Add Task
+              </button>
+            </form>
           </fieldset>
-        </form>
+        </div>
       </main>
     </>
   );
