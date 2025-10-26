@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { addElement, getElement } from "./utilities/utilities";
+import TableRow from "./TableRow";
 
 function App() {
   const [allData, setAllData] = useState([]);
@@ -9,11 +10,14 @@ function App() {
     setAllData(storedData);
   }, []);
 
-  console.log(allData);
   const handleAddTask = (e) => {
     e.preventDefault();
     const newTask = e.target.task.value;
     addElement(newTask);
+
+    const storedData = getElement();
+    setAllData(storedData);
+
     e.target.task.value = "";
   };
   return (
@@ -29,37 +33,35 @@ function App() {
           <p>Complete Task : 0</p>
         </div>
         {/* Table */}
-        <div className="overflow-x-auto bg-base-200 mt-10 p-5 rounded-2xl">
+        <div className="overflow-x-auto bg-base-200 mt-10 p-5 rounded-2xl mb-48">
           <table className="table table-zebra">
             {/* head */}
             <thead>
               <tr>
                 <th></th>
                 <th>Task Name</th>
-
                 <th>Complete</th>
               </tr>
             </thead>
             <tbody>
-              {
-                
-              }
+              {allData.map((data, index) => (
+                <TableRow key={index} data={data} no={index} setAllData={setAllData}></TableRow>
+              ))}
             </tbody>
           </table>
         </div>
         {/* Add Task */}
-        <div className="bg-gray-200 mt-10 p-5 rounded-2xl w-1/2 mx-auto">
-          <h1 className="text-center text-2xl font-semibold ">Add a Task</h1>
-          <fieldset className="fieldset">
-            <form onSubmit={handleAddTask}>
-              <label className="label">Task Details:</label>
+        <div className="bg-gray-200  p-5 rounded-2xl w-full container mx-auto gap-3 fixed bottom-10 flex justify-between items-center">
+          {/* <h1 className="text-center text-2xl font-semibold border">Add a Task</h1> */}
+          <fieldset className="fieldset w-full">
+            <form className="flex items-center" onSubmit={handleAddTask}>
               <input
                 type="text"
                 name="task"
-                className="input w-full mt-2"
+                className="input w-full"
                 placeholder="Add New Task"
               />
-              <button className="btn btn-neutral mt-4">Add Task</button>
+              <button className="btn btn-neutral ml-2">Add Task</button>
             </form>
           </fieldset>
         </div>

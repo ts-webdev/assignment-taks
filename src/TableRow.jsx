@@ -1,25 +1,23 @@
 import React from "react";
+import { getElement, removeElement } from "./utilities/utilities";
 
-const TableRow = () => {
+const TableRow = ({data, no, setAllData}) => {
+  const handleDeleteTask = (e)=>{
+    const deletData = e.target.parentNode.parentNode.children[1].innerText;
+    removeElement(deletData)
+
+    const storedArray = getElement()
+    setAllData(storedArray)
+  }
   return (
     <tr>
-      <th>2</th>
+      <th>{no + 1}</th>
       <td>
-        Hart Hagerty Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-        Quia, sed! Hart Hagerty Lorem ipsum dolor, sit amet consectetur
-        adipisicing elit. Quia, sed!Hart Hagerty Lorem ipsum dolor, sit amet
-        consectetur adipisicing elit. Quia, sed!Hart Hagerty Lorem ipsum dolor,
-        sit amet consectetur adipisicing elit. Quia, sed!Hart Hagerty Lorem
-        ipsum dolor, sit amet consectetur adipisicing elit. Quia, sed!Hart
-        Hagerty Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia,
-        sed!Hart Hagerty Lorem ipsum dolor, sit amet consectetur adipisicing
-        elit. Quia, sed!Hart Hagerty Lorem ipsum dolor, sit amet consectetur
-        adipisicing elit. Quia, sed!Hart Hagerty Lorem ipsum dolor, sit amet
-        consectetur adipisicing elit. Quia, sed!
+        {data}
       </td>
 
       <td>
-        <button className="btn bg-gray-300 min-w-30 ">Delete Task</button>
+        <button onClick={handleDeleteTask} className="btn bg-gray-300 min-w-30 ">Delete Task</button>
       </td>
     </tr>
   );
