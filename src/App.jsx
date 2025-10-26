@@ -1,12 +1,20 @@
+import { useEffect, useState } from "react";
 import "./App.css";
-import { addElement } from "./utilities/utilities";
+import { addElement, getElement } from "./utilities/utilities";
 
 function App() {
+  const [allData, setAllData] = useState([]);
+  useEffect(() => {
+    const storedData = getElement();
+    setAllData(storedData);
+  }, []);
+
+  console.log(allData);
   const handleAddTask = (e) => {
     e.preventDefault();
     const newTask = e.target.task.value;
-    console.log(newTask);
-    addElement(newTask)
+    addElement(newTask);
+    e.target.task.value = "";
   };
   return (
     <>
@@ -33,53 +41,9 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
-              <tr>
-                <th>1</th>
-                <td>Hello</td>
-
-                <td>
-                  <button className="btn bg-gray-300 min-w-30">
-                    Delete Task
-                  </button>
-                </td>
-              </tr>
-              {/* row 2 */}
-              <tr>
-                <th>2</th>
-                <td>
-                  Hart Hagerty Lorem ipsum dolor, sit amet consectetur
-                  adipisicing elit. Quia, sed! Hart Hagerty Lorem ipsum dolor,
-                  sit amet consectetur adipisicing elit. Quia, sed!Hart Hagerty
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Quia, sed!Hart Hagerty Lorem ipsum dolor, sit amet consectetur
-                  adipisicing elit. Quia, sed!Hart Hagerty Lorem ipsum dolor,
-                  sit amet consectetur adipisicing elit. Quia, sed!Hart Hagerty
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Quia, sed!Hart Hagerty Lorem ipsum dolor, sit amet consectetur
-                  adipisicing elit. Quia, sed!Hart Hagerty Lorem ipsum dolor,
-                  sit amet consectetur adipisicing elit. Quia, sed!Hart Hagerty
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Quia, sed!
-                </td>
-
-                <td>
-                  <button className="btn bg-gray-300 min-w-30 ">
-                    Delete Task
-                  </button>
-                </td>
-              </tr>
-              {/* row 3 */}
-              <tr>
-                <th>3</th>
-                <td>Brice Swyre</td>
-
-                <td>
-                  <button className="btn bg-gray-300 min-w-30">
-                    Delete Task
-                  </button>
-                </td>
-              </tr>
+              {
+                
+              }
             </tbody>
           </table>
         </div>
@@ -92,12 +56,10 @@ function App() {
               <input
                 type="text"
                 name="task"
-                className="input w-full"
+                className="input w-full mt-2"
                 placeholder="Add New Task"
               />
-              <button  className="btn btn-neutral mt-4">
-                Add Task
-              </button>
+              <button className="btn btn-neutral mt-4">Add Task</button>
             </form>
           </fieldset>
         </div>

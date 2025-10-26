@@ -1,4 +1,4 @@
-const getElement = () => {
+export const getElement = () => {
   const dataSTR = localStorage.getItem('assignmentTask');
   if(dataSTR){
     const data = JSON.parse(dataSTR);
